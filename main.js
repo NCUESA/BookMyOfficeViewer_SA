@@ -12,8 +12,10 @@ let currMonth = new Date().getMonth();
 
 let reservations = {};
 
-// const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheet_id}/values/${tab_name}?key=${api_key}`;
-const url = "test.json";  // 替換為 Google Sheets API URL
+const spreadsheet_id = "1HPZ6lbAu615E3JEnxIO4SHDVUWQu2FtZvGtXDQC9rhM";
+const tab_name = "sheet3";
+const api_key = "AIzaSyD4Oxgb4ZMw6zt-41DZXQZzyxquiAKd1yc";
+const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheet_id}/values/${tab_name}?key=${api_key}`;
 
 
 const modal = document.getElementById("myModal");
@@ -57,18 +59,20 @@ function fetchReservations() {
         const rows = data.values;
         for (let i = 2; i < rows.length; i++) {
             const row = rows[i];
-            const date = parseDate(row[10]);
-            if (!reservations[date]) {
-                reservations[date] = [];
+            if (row[2] === "通過") {
+                const date = parseDate(row[10]);
+                if (!reservations[date]) {
+                    reservations[date] = [];
+                }
+                reservations[date].push({
+                    name: row[6],
+                    reason: row[8],
+                    office: row[9],
+                    date: date,
+                    startTime: row[11],
+                    endTime: row[12]
+                });
             }
-            reservations[date].push({
-                name: row[6],
-                reason: row[8],
-                office: row[9],
-                date: date,
-                startTime: row[11],
-                endTime: row[12]
-            });
         }
         generateCalendar(currYear, currMonth);
         loading.style.display = "none";
