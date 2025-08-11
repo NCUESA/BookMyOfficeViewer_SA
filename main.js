@@ -12,10 +12,7 @@ let currMonth = new Date().getMonth();
 
 let reservations = {};
 
-const spreadsheet_id = "1HPZ6lbAu615E3JEnxIO4SHDVUWQu2FtZvGtXDQC9rhM";
-const tab_name = "sheet3";
-const api_key = "AIzaSyD4Oxgb4ZMw6zt-41DZXQZzyxquiAKd1yc";
-const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheet_id}/values/${tab_name}?key=${api_key}`;
+const url = `https://officeapi.ncuesa.org.tw`;
 
 
 const modal = document.getElementById("myModal");
@@ -238,3 +235,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.matchMedia('(prefers-color-scheme: dark)').addListener(setThemeFromSystem);
 });
+
